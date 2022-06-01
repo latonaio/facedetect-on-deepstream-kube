@@ -1,0 +1,18 @@
+version: "3"
+services:
+  deepstream-facedetect:
+    container_name: deepstream-facedetect
+    privileged: yes
+    network_mode: host
+    image: latonaio/facedetect-on-deepstream:latest
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./:/app/src
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /dev:/dev
+    environment:
+      - DISPLAY
+    working_dir: /app/src
+    tty: true
