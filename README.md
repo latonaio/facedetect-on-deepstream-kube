@@ -11,6 +11,7 @@ facedetect-on-deepstream-kube は、DeepStream 上で FaceDetect の AIモデル
 
 ## FaceDetectについて
 FaceDetect は、画像内の人の顔を検出し、カテゴリラベルを返すAIモデルです。  
+FaceDetectIR は、特徴抽出にResNet18を使用しており、混雑した場所でも正確に物体検出を行うことができます。
 
 ## 動作手順
 ### Docker imageの作成
@@ -58,3 +59,7 @@ stream-start: ## ストリーミングを開始する
 
 ## engineファイルについて
 engineファイルである facedetect.engine は、[facedetect-on-tao-toolkit](https://github.com/latonaio/facedetect-on-tao-toolkit)と共通のファイルであり、当該レポジトリで作成した engineファイルを、本リポジトリで使用しています。  
+
+## 演算について
+本レポジトリでは、ニューラルネットワークのモデルにおいて、エッジコンピューティング環境での演算スループット効率を高めるため、FP16(半精度浮動小数点)を使用しています。  
+浮動小数点値の変更は、Makefileの以下の部分を変更し、engineファイルを生成してください。
